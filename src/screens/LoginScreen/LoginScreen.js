@@ -41,18 +41,20 @@ export default class LoginScreen extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Login Screen</Text>
 				<TextInput
+					ref='EmailInput'
 					placeholder='Input your email'
 					onChangeText={this.setEmail}
 					value={this.state.email}
+					onSubmitEditing={() => this.refs.PasswordInput.focus()}
 				/>
 				<TextInput
+					ref='PasswordInput'
 					placeholder='Input your password'
 					onChangeText={this.setPassword}
 					value={this.state.password}
 					secureTextEntry={true}
 				/>
-				<Text>{this.state.jwt}</Text>
-				<Text>{this.state.err}</Text>
+				{ this.state.err !== '' && <Text>{this.state.err}</Text> }
 				<Button title='Login' onPress={this.login} />
 				<Button title='New Customer' onPress={this.newCustomer} />
             </View>

@@ -33,7 +33,7 @@ export default class NewCustomerScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Login Screen</Text>
+                <Text style={styles.title}>Creation Screen</Text>
 				<TextInput
 					ref='NameInput'
 					placeholder='Input your name'

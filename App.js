@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import {
-	StyleSheet
-} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
 
-import LoginNavigator from './src/navigators/LoginNavigator';
+import { LoginNavigator } from './src/navigators/LoginNavigator';
+import store from './src/config/store';
 
 export default class App extends Component {
 	render() {
 		return (
-			<LoginNavigator />
+			<Provider store={store}>
+				<LoginNavigator />
+			</Provider>
 		);
 	}
 }
