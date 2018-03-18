@@ -30,7 +30,7 @@ export const LoginNavigatorContainer = StackNavigator({
 		}
 	}
 }, {
-	initialRouteName: 'MainNav',
+	initialRouteName: 'Login',
 	navigationOptions: {
 		header: false
 	}

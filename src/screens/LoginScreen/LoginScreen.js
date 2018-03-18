@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import { Button, View, Text, TextInput } from 'react-native';
+import { connect } from 'react-redux';
 
+import { customerAuth } from '../../actions/customerActions';
+import Icon from '../../components/Icon';
 import styles from "./LoginScreenStyle";
-import axios from 'axios';
 
-export default class LoginScreen extends Component {
+const mapStateToProps = (state) => ({
+	customer: state.customer
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	onLogin: (login) => dispatch(customerAuth(login)),
+});
+
+class LoginScreen extends Component {
 	state = {
 		email: '',
 		password: '',
-		jwt: '',
-		err: ''
 	};
 
 	setEmail = (email) => this.setState({ email });
 	setPassword = (password) => this.setState({ password });
 
 	login = () => {
-		axios.post('http://api-vanhack-event-sp.azurewebsites.net/api/v1/Customer/auth', null, {params: { email: this.state.email, password: this.state.password }})
-			.then((res) => {
-				this.setState({
-					jwt: res.data,
-					err: ''
-				});
-			}, (err) => {
-				this.setState({
-					jwt: '',
-					err: err.response.data.error
-				})
-			});
+		this.props.onLogin({ email: this.state.email, password: this.state.password });
 	};
 
 	newCustomer = () => {
@@ -37,6 +34,8 @@ export default class LoginScreen extends Component {
 	};
 
     render() {
+		const { customer } = this.props;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Login Screen</Text>
@@ -54,10 +53,17 @@ export default class LoginScreen extends Component {
 					value={this.state.password}
 					secureTextEntry={true}
 				/>
-				{ this.state.err !== '' && <Text>{this.state.err}</Text> }
+				{ customer.error !== '' &&
+					<View style={{flexDirection: 'row'}}>
+						<Icon size={20} nameIos='ios-alert-outline' nameAndroid='error-outline'/>
+						<Text>{customer.error}</Text>
+					</View>
+				}
 				<Button title='Login' onPress={this.login} />
 				<Button title='New Customer' onPress={this.newCustomer} />
             </View>
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -22,7 +22,6 @@ class CousineScreen extends Component {
 	render() {
 		return (
 			<View>
-				<Text>Cousine</Text>
 				<FlatList
 					data={this.props.cousine.cousines}
 					keyExtractor={(item, index) => item.id}

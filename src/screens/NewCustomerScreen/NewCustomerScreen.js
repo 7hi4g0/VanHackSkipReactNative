@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { Button, View, Text, TextInput } from 'react-native';
+import { connect } from 'react-redux';
 
+import Icon from '../../components/Icon';
+import { customerCreate } from '../../actions/customerActions';
 import styles from "./NewCustomerScreenStyle";
-import axios from 'axios';
 
-export default class NewCustomerScreen extends Component {
+const mapStateToProps = (state) => ({
+	customer: state.customer
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	onCreate: (customer) => dispatch(customerCreate(customer)),
+});
+
+class NewCustomerScreen extends Component {
 	state = {
 		name: '',
 		email: '',
@@ -18,19 +28,12 @@ export default class NewCustomerScreen extends Component {
 	setPassword = (password) => this.setState({ password });
 
 	createCustomer = () => {
-		axios.post('http://api-vanhack-event-sp.azurewebsites.net/api/v1/Customer', this.state)
-			.then((res) => {
-				this.setState({
-					jwt: res.data
-				});
-			}, (err) => {
-				this.setState({
-					err: err.response.data.error
-				});
-			});
+		this.props.onCreate(this.state);
 	};
 
     render() {
+		const { customer } = this.props;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Creation Screen</Text>
@@ -62,10 +65,15 @@ export default class NewCustomerScreen extends Component {
 					value={this.state.password}
 					secureTextEntry={true}
 				/>
-				<Text>{this.state.jwt}</Text>
-				<Text>{this.state.err}</Text>
+				{ customer.error !== '' &&
+					<View style={{flexDirection: 'row'}}>
+						<Icon size={20} nameIos='ios-alert-outline' nameAndroid='error-outline'/>
+						<Text>{customer.error}</Text>
+					</View>
+				}
 				<Button title='Create' onPress={this.createCustomer} />
             </View>
         )
     }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(NewCustomerScreen);
