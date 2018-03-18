@@ -8,6 +8,7 @@ import {
 
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NewCustomerScreen from '../screens/NewCustomerScreen/NewCustomerScreen';
+import { MainNavigator } from './MainNavigator';
 
 export const LoginNavigatorContainer = StackNavigator({
 	Login: {
@@ -22,14 +23,17 @@ export const LoginNavigatorContainer = StackNavigator({
 			title: 'NewCustomer'
 		}
 	},
-	// MainNav: {
-	// 	screen: MainNavigator,
-	// 	navigationOptions: {
-	// 		title: 'Main Navigation'
-	// 	}
-	// }
+	MainNav: {
+		screen: MainNavigator,
+		navigationOptions: {
+			title: 'Main Navigation'
+		}
+	}
 }, {
-	initialRouteName: 'Login',
+	initialRouteName: 'MainNav',
+	navigationOptions: {
+		header: false
+	}
 });
 
 const mapStateToProps = (state) => ({
