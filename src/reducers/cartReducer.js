@@ -3,9 +3,16 @@ import {
 	CART_REMOVE,
 	CART_DELETE
 } from '../actions/cartActions';
+import {
+	ORDER_PLACE,
+	ORDER_PLACED,
+	ORDER_PLACE_ERROR
+} from '../actions/orderActions';
 
 const INITIAL_STATE = {
-	items: []
+	items: [],
+	storeId: 0,
+	error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,6 +22,9 @@ export default (state = INITIAL_STATE, action) => {
 		item;
 	
 	if (product) {
+		if (state.storeId !== 0 && state.storeId !== product.storeId) {
+			return state;
+		}
 		itemIndex = items.findIndex((i) => i.productId === product.id)
 	}
 
@@ -43,6 +53,7 @@ export default (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
+				storeId: product.storeId,
 				items
 			};
 		case CART_REMOVE:
@@ -64,6 +75,7 @@ export default (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
+				storeId: items.length === 0 ? 0 : product.storeId,
 				items
 			};
 		case CART_DELETE:
@@ -73,7 +85,20 @@ export default (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
+				storeId: items.length === 0 ? 0 : product.storeId,
 				items
+			};
+		case ORDER_PLACE:
+			return {
+				...state,
+				error: ''
+			};
+		case ORDER_PLACED:
+			return INITIAL_STATE;
+		case ORDER_PLACE_ERROR:
+			return {
+				...state,
+				error: action.err
 			};
 		default:
 			return state;

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, View, FlatList, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { Button, View, FlatList, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import Icon from '../../components/Icon';
 import { cartAdd, cartRemove, cartDelete } from '../../actions/cartActions';
+import { orderPlace } from '../../actions/orderActions';
 
 const mapStateToProps = (state) => ({
 	cart: state.cart
@@ -12,16 +13,24 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	onAdd: (product) => dispatch(cartAdd(product)),
 	onRemove: (product) => dispatch(cartRemove(product)),
-	onDelete: (product) => dispatch(cartDelete(product))
+	onDelete: (product) => dispatch(cartDelete(product)),
+	onPlace: (deliveryInfo) => dispatch(orderPlace(deliveryInfo))
 });
 
 class CartScreen extends Component {
+	state = {
+		contact: '',
+		deliveryAddress: ''
+	};
 
 	addItem = (product) => () => this.props.onAdd(product);
 	removeItem = (product) => () => this.props.onRemove(product);
 	deleteItem = (product) => () => this.props.onDelete(product);
 
-	placeOrder = () => { /*TODO*/ };
+	placeOrder = () => this.props.onPlace(this.state);
+
+	setContact = (contact) => this.setState({ contact });
+	setDeliveryAddress = (deliveryAddress) => this.setState({ deliveryAddress });
 
 	render() {
 		const { cart } = this.props;
@@ -60,6 +69,25 @@ class CartScreen extends Component {
 						</View>
 					)}
 				/>
+				<TextInput
+					ref='ContactInput'
+					placeholder='Input your contact'
+					onChangeText={this.setContact}
+					value={this.state.contact}
+					onSubmitEditing={() => this.refs.DeliveryAddressInput.focus()}
+				/>
+				<TextInput
+					ref='DeliveryAddressInput'
+					placeholder='Input the delivery address'
+					onChangeText={this.setDeliveryAddress}
+					value={this.state.deliveryAddress}
+				/>
+				{ cart.error !== '' &&
+					<View style={{flexDirection: 'row'}}>
+						<Icon size={20} nameIos='ios-alert-outline' nameAndroid='error-outline'/>
+						<Text>{cart.error}</Text>
+					</View>
+				}
 				<Button title='Place Order' onPress={this.placeOrder}/>
 			</ScrollView>
 		)

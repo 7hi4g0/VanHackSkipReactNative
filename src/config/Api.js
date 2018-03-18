@@ -10,7 +10,9 @@ const Api = {
 
 	getStore: () => axios.get(`${API_ENDPOINT}/Store`),
 
-	getProduct: () => axios.get(`${API_ENDPOINT}/Product`)
+	getProduct: () => axios.get(`${API_ENDPOINT}/Product`),
+
+	postOrder: (order, token) => axios.post(`${API_ENDPOINT}/Order`, order, { headers: {Authorization: 'Bearer ' + token}}),
 };
 
 export default Api;
