@@ -12,6 +12,7 @@ const Api = {
 
 	getProduct: () => axios.get(`${API_ENDPOINT}/Product`),
 
+	getOrders: (token) => axios.get(`${API_ENDPOINT}/Order/customer`, { headers: {Authorization: 'Bearer ' + token}}),
 	postOrder: (order, token) => axios.post(`${API_ENDPOINT}/Order`, order, { headers: {Authorization: 'Bearer ' + token}}),
 };
 

@@ -8,6 +8,7 @@ import {
 
 import { ProductNavigator } from './ProductNavigator';
 import CartScreen from '../screens/CartScreen/CartScreen';
+import OrderScreen from '../screens/OrderScreen/OrderScreen';
 
 export const MainNavigatorContainer = DrawerNavigator({
 	ProductNav: {
@@ -16,10 +17,16 @@ export const MainNavigatorContainer = DrawerNavigator({
 			title: 'Products'
 		}
 	},
-	CartScreen: {
+	Cart: {
 		screen: CartScreen,
 		navigationOptions: {
 			title: 'Cart'
+		}
+	},
+	Orders: {
+		screen: OrderScreen,
+		navigationOptions: {
+			title: 'Orders'
 		}
 	}
 }, {

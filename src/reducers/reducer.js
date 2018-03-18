@@ -8,6 +8,7 @@ import storeReducer from './storeReducer';
 import productReducer from './productReducer';
 import mainNavigatorReducer from './mainNavigatorReducer';
 import cartReducer from './cartReducer';
+import orderReducer from './orderReducer';
 
 export default combineReducers({
 	loginNavigator: loginNavigatorReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
 	customer: customerReducer,
 	store: storeReducer,
 	product: productReducer,
-	cart: cartReducer
+	cart: cartReducer,
+	order: orderReducer
 });
