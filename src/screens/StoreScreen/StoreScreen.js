@@ -3,17 +3,17 @@ import { View, FlatList, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import Icon from '../../components/Icon';
-import { cousinesFetch } from '../../actions/cousineActions';
+import { storesFetch } from '../../actions/storeActions';
 
 const mapStateToProps = (state) => ({
-	cousine: state.cousine
+	store: state.store
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	onFetch: () => dispatch(cousinesFetch())
+	onFetch: () => dispatch(storesFetch())
 });
 
-class CousineScreen extends Component {
+class StoreScreen extends Component {
 
 	componentDidMount() {
 		this.props.onFetch();
@@ -22,7 +22,7 @@ class CousineScreen extends Component {
 	render() {
 		return (
 			<FlatList
-				data={this.props.cousine.cousines}
+				data={this.props.store.stores}
 				keyExtractor={(item, index) => item.id}
 				renderItem={({item}) => (
 					<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -35,4 +35,4 @@ class CousineScreen extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CousineScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreScreen);

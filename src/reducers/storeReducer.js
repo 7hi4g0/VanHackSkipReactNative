@@ -1,25 +1,25 @@
 import {
-	COUSINE_FETCH,
-	COUSINE_FETCHED
-} from '../actions/cousineActions';
+	STORE_FETCH,
+	STORE_FETCHED
+} from '../actions/storeActions';
 
 const INITIAL_STATE = {
-	cousines: []
+	stores: []
 };
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case COUSINE_FETCH:
+		case STORE_FETCH:
 			return {
 				...state,
-				cousines: []
-			};
-		case COUSINE_FETCHED:
+				stores: []
+			}
+		case STORE_FETCHED:
 			return {
 				...state,
-				cousines: action.cousines
-			};
+				stores: action.stores
+			}
 		default:
 			return state;
 	}
-};
+}

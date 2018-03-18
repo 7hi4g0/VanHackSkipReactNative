@@ -1,15 +1,18 @@
 import Api from '../config/Api';
 
+export const COUSINE_FETCH = 'COUSINE_FETCH';
+export const COUSINE_FETCHED = 'COUSINE_FETCHED';
+
 export function cousinesFetch() {
 	return (dispatch, getState) => {
 		dispatch({
-			type: 'CUISINE_FETCH'
+			type: COUSINE_FETCH
 		});
 
 		Api.getCousine()
 			.then((res) => {
 				dispatch({
-					type: 'CUISINE_FETCHED',
+					type: COUSINE_FETCHED,
 					cousines: res.data
 				});
 			});

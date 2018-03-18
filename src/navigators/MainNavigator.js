@@ -7,12 +7,26 @@ import {
 } from 'react-navigation-redux-helpers';
 
 import CousineScreen from '../screens/CousineScreen/CousineScreen';
+import StoreScreen from '../screens/StoreScreen/StoreScreen';
+import ProductScreen from '../screens/ProductScreen/ProductScreen';
 
 export const MainNavigatorContainer = TabNavigator({
 	Cousine: {
 		screen: CousineScreen,
 		navigationOptions: {
 			title: 'Cousine'
+		}
+	},
+	Store: {
+		screen: StoreScreen,
+		navigationOptions: {
+			title: 'Store'
+		}
+	},
+	Product: {
+		screen: ProductScreen,
+		navigationOptions: {
+			title: 'Product'
 		}
 	}
 }, {
