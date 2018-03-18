@@ -1,36 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TabNavigator, addNavigationHelpers } from 'react-navigation';
+import { DrawerNavigator, addNavigationHelpers } from 'react-navigation';
 import {
 	createReactNavigationReduxMiddleware,
 	createReduxBoundAddListener
 } from 'react-navigation-redux-helpers';
 
-import CousineScreen from '../screens/CousineScreen/CousineScreen';
-import StoreScreen from '../screens/StoreScreen/StoreScreen';
-import ProductScreen from '../screens/ProductScreen/ProductScreen';
+import { ProductNavigator } from './ProductNavigator';
 
-export const MainNavigatorContainer = TabNavigator({
-	Cousine: {
-		screen: CousineScreen,
+export const MainNavigatorContainer = DrawerNavigator({
+	ProductNav: {
+		screen: ProductNavigator,
 		navigationOptions: {
-			title: 'Cousine'
-		}
-	},
-	Store: {
-		screen: StoreScreen,
-		navigationOptions: {
-			title: 'Store'
-		}
-	},
-	Product: {
-		screen: ProductScreen,
-		navigationOptions: {
-			title: 'Product'
+			title: 'Products'
 		}
 	}
 }, {
-	initialRouteName: 'Cousine'
+	initialRouteName: 'ProductNav'
 });
 
 const mapStateToProps = (state) => ({

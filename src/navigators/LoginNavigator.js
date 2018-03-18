@@ -6,6 +6,7 @@ import {
 	createReduxBoundAddListener
 } from 'react-navigation-redux-helpers';
 
+import Header from '../components/Header';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NewCustomerScreen from '../screens/NewCustomerScreen/NewCustomerScreen';
 import { MainNavigator } from './MainNavigator';
@@ -25,14 +26,17 @@ export const LoginNavigatorContainer = StackNavigator({
 	},
 	MainNav: {
 		screen: MainNavigator,
-		navigationOptions: {
-			title: 'Main Navigation'
-		}
+		navigationOptions: ({navigation}) => ({
+			title: 'Main Navigation',
+			header: (
+				<Header navigation={navigation} />
+			)
+		})
 	}
 }, {
 	initialRouteName: 'Login',
 	navigationOptions: {
-		header: false
+		header: null
 	}
 });
 
