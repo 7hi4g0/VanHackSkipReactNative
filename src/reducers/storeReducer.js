@@ -1,10 +1,14 @@
 import {
 	STORE_FETCH,
-	STORE_FETCHED
+	STORE_FETCHED,
+	STORE_PRODUCTS_FETCH,
+	STORE_PRODUCTS_FETCHED
 } from '../actions/storeActions';
 
 const INITIAL_STATE = {
-	stores: []
+	stores: [],
+	selectedStoreId: 0,
+	products: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +22,16 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				stores: action.stores
+			}
+		case STORE_PRODUCTS_FETCH:
+			return {
+				...state,
+				products: []
+			}
+		case STORE_PRODUCTS_FETCHED:
+			return {
+				...state,
+				products: action.products
 			}
 		default:
 			return state;

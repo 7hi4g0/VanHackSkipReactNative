@@ -3,22 +3,24 @@ import { View, FlatList, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import Icon from '../../components/Icon';
-import { productsFetch } from '../../actions/productActions';
+import { storeProductsFetch } from '../../actions/storeActions';
 import { cartAdd } from '../../actions/cartActions';
 
 const mapStateToProps = (state) => ({
-	product: state.product
+	store: state.store
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	onFetch: () => dispatch(productsFetch()),
+	onFetch: (storeId) => dispatch(storeProductsFetch(storeId)),
 	onAdd: (product) => dispatch(cartAdd(product))
 });
 
-class ProductScreen extends Component {
+class StoreProductScreen extends Component {
 
 	componentDidMount() {
-		this.props.onFetch();
+		const { storeId } = this.props.navigation.state.params;
+
+		this.props.onFetch(storeId);
 	}
 
 	addItem = (product) => () => this.props.onAdd(product);
@@ -26,7 +28,7 @@ class ProductScreen extends Component {
 	render() {
 		return (
 			<FlatList
-				data={this.props.product.products}
+				data={this.props.store.products}
 				keyExtractor={(item, index) => item.id}
 				renderItem={({item}) => (
 					<TouchableOpacity onPress={this.addItem(item)}>
@@ -45,4 +47,4 @@ class ProductScreen extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreProductScreen);

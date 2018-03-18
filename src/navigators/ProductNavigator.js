@@ -7,8 +7,8 @@ import {
 } from 'react-navigation-redux-helpers';
 
 import CousineScreen from '../screens/CousineScreen/CousineScreen';
-import StoreScreen from '../screens/StoreScreen/StoreScreen';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
+import { StoreNavigator } from './StoreNavigator';
 
 export const ProductNavigatorContainer = TabNavigator({
 	Cousine: {
@@ -17,8 +17,8 @@ export const ProductNavigatorContainer = TabNavigator({
 			title: 'Cousine'
 		}
 	},
-	Store: {
-		screen: StoreScreen,
+	StoreNav: {
+		screen: StoreNavigator,
 		navigationOptions: {
 			title: 'Store'
 		}

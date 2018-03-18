@@ -9,11 +9,13 @@ import productReducer from './productReducer';
 import mainNavigatorReducer from './mainNavigatorReducer';
 import cartReducer from './cartReducer';
 import orderReducer from './orderReducer';
+import storeNavigatorReducer from './storeNavigatorReducer';
 
 export default combineReducers({
 	loginNavigator: loginNavigatorReducer,
 	mainNavigator: mainNavigatorReducer,
 	productNavigator: productNavigatorReducer,
+	storeNavigator: storeNavigatorReducer,
 	cousine: cousineReducer,
 	customer: customerReducer,
 	store: storeReducer,

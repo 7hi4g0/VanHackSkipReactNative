@@ -9,6 +9,7 @@ const Api = {
 	postCustomer: (customer) => axios.post(`${API_ENDPOINT}/Customer`, customer),
 
 	getStore: () => axios.get(`${API_ENDPOINT}/Store`),
+	getStoreProducts: (storeId) => axios.get(`${API_ENDPOINT}/Store/${storeId}/products`),
 
 	getProduct: () => axios.get(`${API_ENDPOINT}/Product`),
 
