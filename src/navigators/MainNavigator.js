@@ -7,12 +7,19 @@ import {
 } from 'react-navigation-redux-helpers';
 
 import { ProductNavigator } from './ProductNavigator';
+import CartScreen from '../screens/CartScreen/CartScreen';
 
 export const MainNavigatorContainer = DrawerNavigator({
 	ProductNav: {
 		screen: ProductNavigator,
 		navigationOptions: {
 			title: 'Products'
+		}
+	},
+	CartScreen: {
+		screen: CartScreen,
+		navigationOptions: {
+			title: 'Cart'
 		}
 	}
 }, {
