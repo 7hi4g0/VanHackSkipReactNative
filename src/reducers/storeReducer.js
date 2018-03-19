@@ -7,7 +7,6 @@ import {
 
 const INITIAL_STATE = {
 	stores: [],
-	selectedStoreId: 0,
 	products: [],
 };
 

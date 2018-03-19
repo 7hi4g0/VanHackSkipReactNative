@@ -4,6 +4,7 @@ const API_ENDPOINT = 'http://api-vanhack-event-sp.azurewebsites.net/api/v1';
 
 const Api = {
 	getCousine: () => axios.get(`${API_ENDPOINT}/Cousine`),
+	getCousineStores: (cousineId) => axios.get(`${API_ENDPOINT}/Cousine/${cousineId}/stores`),
 
 	postCustomerAuth: (login) => axios.post(`${API_ENDPOINT}/Customer/auth`, null, {params: login}),
 	postCustomer: (customer) => axios.post(`${API_ENDPOINT}/Customer`, customer),

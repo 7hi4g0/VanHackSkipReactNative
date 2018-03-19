@@ -3,33 +3,38 @@ import { View, FlatList, Text, ScrollView, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux';
 
 import Icon from '../../components/Icon';
-import { cousinesFetch } from '../../actions/cousineActions';
+import { cousineStoresFetch } from '../../actions/cousineActions';
 
 const mapStateToProps = (state) => ({
 	cousine: state.cousine
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	onFetch: () => dispatch(cousinesFetch())
+	onFetch: (cousineId) => dispatch(cousineStoresFetch(cousineId))
 });
 
-class CousineScreen extends Component {
+class CousineStoreScreen extends Component {
 
 	componentDidMount() {
-		this.props.onFetch();
+		const { cousineId } = this.props.navigation.state.params;
+
+		this.props.onFetch(cousineId);
 	}
 
-	gotoCousineStores = (cousine) => () => this.props.navigation.navigate('CousineStore', { cousineId: cousine.id });
+	gotoStoreProducts = (store) => () => this.props.navigation.navigate({ routeName: 'StoreProduct', params: { storeId: store.id }});
 
 	render() {
 		return (
 			<FlatList
-				data={this.props.cousine.cousines}
+				data={this.props.cousine.stores}
 				keyExtractor={(item, index) => item.id}
 				renderItem={({item}) => (
-					<TouchableOpacity onPress={this.gotoCousineStores(item)}>
+					<TouchableOpacity onPress={this.gotoStoreProducts(item)}>
 						<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-							<Text>{item.name}</Text>
+							<View style={{width: '90%'}}>
+									<Text>{item.name}</Text>
+									<Text>{item.address}</Text>
+								</View>
 							<Icon size={30} nameIos='ios-arrow-round-forward' nameAndroid='arrow-forward' />
 						</View>
 					</TouchableOpacity>
@@ -39,4 +44,4 @@ class CousineScreen extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CousineScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CousineStoreScreen);

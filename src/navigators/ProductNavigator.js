@@ -9,10 +9,11 @@ import {
 import CousineScreen from '../screens/CousineScreen/CousineScreen';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
 import { StoreNavigator } from './StoreNavigator';
+import { CousineNavigator } from './CousineNavigator';
 
 export const ProductNavigatorContainer = TabNavigator({
-	Cousine: {
-		screen: CousineScreen,
+	CousineNav: {
+		screen: CousineNavigator,
 		navigationOptions: {
 			title: 'Cousine'
 		}
@@ -30,7 +31,7 @@ export const ProductNavigatorContainer = TabNavigator({
 		}
 	}
 }, {
-	initialRouteName: 'Cousine'
+	initialRouteName: 'CousineNav'
 });
 
 const mapStateToProps = (state) => ({
