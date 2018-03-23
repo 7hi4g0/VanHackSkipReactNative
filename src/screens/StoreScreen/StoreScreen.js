@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import Icon from '../../components/Icon';
+import StoreList from '../../components/StoreList';
 import { storesFetch } from '../../actions/storeActions';
 
 const mapStateToProps = (state) => ({
@@ -23,20 +22,9 @@ class StoreScreen extends Component {
 
 	render() {
 		return (
-			<FlatList
-				data={this.props.store.stores}
-				keyExtractor={(item, index) => item.id}
-				renderItem={({item}) => (
-					<TouchableOpacity onPress={this.gotoStoreProducts(item)}>
-						<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-							<View style={{width: '90%'}}>
-									<Text>{item.name}</Text>
-									<Text>{item.address}</Text>
-								</View>
-							<Icon size={30} nameIos='ios-arrow-round-forward' nameAndroid='arrow-forward' />
-						</View>
-					</TouchableOpacity>
-				)}
+			<StoreList
+				stores={this.props.store.stores}
+				onGotoStoreProducts={this.gotoStoreProducts}
 			/>
 		)
 	}

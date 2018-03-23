@@ -8,6 +8,7 @@ import {
 
 import CousineScreen from '../screens/CousineScreen/CousineScreen';
 import CousineStoreScreen from '../screens/CousineStoreScreen/CousineStoreScreen';
+import StoreProductScreen from '../screens/StoreProductScreen/StoreProductScreen';
 
 export const CousineNavigatorContainer = StackNavigator({
 	Cousines: {
@@ -21,6 +22,12 @@ export const CousineNavigatorContainer = StackNavigator({
 		screen: CousineStoreScreen,
 		navigationOptions: {
 			title: 'Cousine Stores'
+		}
+	},
+	CuisineStoreProduct: {
+		screen: StoreProductScreen,
+		navigationOptions: {
+			title: 'Store Products'
 		}
 	}
 }, {
